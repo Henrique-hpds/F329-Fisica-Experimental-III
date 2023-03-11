@@ -1,6 +1,6 @@
 class Ponto:
     
-    def __init__(self, x:int, y:int, ddp:float) -> None:
+    def __init__(self, x:float, y:float, ddp:float) -> None:
         self.coordenada = {"x": x, "y": y}
         self.ddp = ddp
     
@@ -14,6 +14,17 @@ class Ponto:
             self._ddp = ddp
         else:
             raise ValueError("ddp inválida!")
+        
+    @property
+    def coordenada(self) -> dict:
+        return self._coordenada
+    
+    @coordenada.setter
+    def coordenada(self, coord):
+        if isinstance(coord, list):
+            self._coordenada = {"x": coord[0], "y": coord[1]} 
+        else:
+            self._coordenada = coord
     
     def printar(self) -> None:
         print("[", self.coordenada["x"], ",", self.coordenada["y"], "] -> ", self.ddp, "V")

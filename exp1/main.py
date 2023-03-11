@@ -16,14 +16,15 @@ def ler_dados(pontos:list) -> None:
 def printar_pontos(pontos:list) -> None:
     for atual in pontos:
         atual.printar()
-
-
+        
+        
 def main():
     pontos = list()
     
     ler_dados(pontos)
+    
+    pontos = sorted(pontos, key=lambda ponto: ponto.ddp)
     printar_pontos(pontos)
-
 
 
 if __name__ == "__main__":
