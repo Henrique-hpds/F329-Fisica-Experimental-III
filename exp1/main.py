@@ -1,10 +1,20 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from exp1.ponto import Ponto
+from ponto import Ponto
 
-ponto = Ponto(1, 2, 3)
-ponto.printar()
-ponto.ddp = 92
-ponto.printar()
+pontos = list()
 
-        
+dados = pd.read_excel("dados_inventados.xlsx")
+
+# print(dados)
+
+for atual in dados:
+    pontos.append(Ponto(atual["x"], atual["y"], atual["ddp"]))
+    print(atual)
+
+# coluna_x = pd.read_excel("dados_inventados.xlsx", "x")
+# print(coluna_x[1])
+# coluna_y = list()
+# coluns_ddp = list()
+
+
