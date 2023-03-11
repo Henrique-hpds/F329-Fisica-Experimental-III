@@ -9,13 +9,13 @@ def ler_dados(pontos):
     coluna_y = dados["y"]
     coluna_ddp = dados["ddp"]
 
-    for i in range(len(coluna_x)):
+    for i in range(len(dados)):
         pontos.append(Ponto(int(coluna_x[i]), int(coluna_y[i]), float(coluna_ddp[i])))
     
 
 def printar_pontos(pontos):
-    for i in range(len(pontos)):
-        pontos[i].printar()
+    for atual in pontos:
+        atual.printar()
 
 
 def main():
@@ -23,6 +23,8 @@ def main():
     
     ler_dados(pontos)
     printar_pontos(pontos)
+
+
 
 if __name__ == "__main__":
     main()
