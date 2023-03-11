@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from ponto import Ponto
+from exp1.ponto import Ponto
 
 ponto = Ponto(1, 2, 3)
 ponto.printar()
