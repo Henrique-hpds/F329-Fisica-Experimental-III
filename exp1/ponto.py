@@ -31,3 +31,7 @@ class Ponto:
     
     
 # o ponto possui um dicionário com as coordenadas x e y, além de uma ddp associada a elas
+
+def printar_pontos(pontos:list) -> None:
+    for atual in pontos:
+        atual.printar()
