@@ -15,6 +15,12 @@ def ler_dados(pontos:list) -> None:
     coluna_x_completa.append(float(coluna_x[0]))
     coluna_y_completa.append(float(coluna_y[0]))
     coluna_ddp_completa.append(float(coluna_ddp[0]))
+    cte = 0
+
+    inicio = coluna_y[0]
+    while coluna_y[i] != inicio:
+            cte = i + 1
+            i += 1
 
     for i in range(len(coluna_x) - 1):
         if coluna_x[i] == coluna_x[i+1]:
@@ -32,7 +38,11 @@ def ler_dados(pontos:list) -> None:
             coluna_ddp_completa.append(float(coluna_ddp[i + 1]))
 
 
+    for i in range(0, len(coluna_y), cte)
+
 
     for i in range(len(dados)):
         pontos.append(Ponto(coluna_x_completa[i], coluna_y_completa[i], coluna_ddp_completa[i]))
-    
+
+def media_eixo_y(Pontos pontos):
+
