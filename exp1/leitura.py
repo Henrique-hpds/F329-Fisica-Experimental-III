@@ -4,45 +4,64 @@ from ponto import *
 def ler_dados(pontos:list) -> None:
     dados = pd.read_excel("dados_inventados.xlsx")
 
-    coluna_x = dados["x"]
-    coluna_y = dados["y"]
-    coluna_ddp = dados["ddp"]
+    x = dados["x"]
+    y = dados["y"]
+    ddp = dados["ddp"]
 
-    coluna_x_completa = list()
-    coluna_y_completa = list()
-    coluna_ddp_completa = list()
+    x = [int(i) for i in x]
+    y = [int(i) for i in y]
+    ddp = [float(i) for i in ddp]
+
+    n_colunas = 0
+    n_linhas = 0
+    x_inicial = x[0]
+    i = 0
+
+    while x[i] == x_inicial:
+        i+=1
+    n_colunas = int(((len(x)/i) * 2)+ 3) 
+    n_linhas = int((i * 2) + 3)
     
-    coluna_x_completa.append(float(coluna_x[0]))
-    coluna_y_completa.append(float(coluna_y[0]))
-    coluna_ddp_completa.append(float(coluna_ddp[0]))
-    cte = 0
+    matriz = [ [0 for i in range(n_linhas)] for j in range(n_colunas)]
 
-    inicio = coluna_y[0]
-    while coluna_y[i] != inicio:
-            cte = i + 1
-            i += 1
+    for i in range(len(x)):
+        matriz[2 * x[i]][2 * y[i]] = ddp[i]
+ 
+    for i in range(2, n_colunas - 2, 2):
+        for j in range(2, n_linhas - 2, 2):
+            if matriz[i + 2][j] != 0:
+                matriz[i + 1][j] = (matriz[i][j] + matriz[i + 2][j])/2 
+            
+            if matriz[i - 2][j] != 0:
+                matriz[i - 2][j] = (matriz[i][j] + matriz[i - 2][j])/2 
 
-    for i in range(len(coluna_x) - 1):
-        if coluna_x[i] == coluna_x[i+1]:
-            if not (coluna_x_completa[-1] == coluna_x[i] and coluna_y_completa[-1] == coluna_y[i]):
-                coluna_x_completa.append(float(coluna_x[i])) 
-                coluna_y_completa.append(float(coluna_y[i]))
-                coluna_ddp_completa.append(float(coluna_ddp[i]))
+            if matriz[i][j + 2] != 0:
+                matriz[i][j + 1] = (matriz[i][j] + matriz[i][j + 2])/2 
 
-            coluna_x_completa.append(float(coluna_x[i]))
-            coluna_y_completa.append((float(coluna_y[i]) + float(coluna_y[i+1]))/2)
-            coluna_ddp_completa.append((float(coluna_ddp[i]) + float(coluna_ddp[i+1]))/2)
+            if matriz[i][j - 2] != 0:
+                matriz[i][j - 1] = (matriz[i][j] + matriz[i][j - 2])/2 
 
-            coluna_x_completa.append(float(coluna_x[i + 1]))
-            coluna_y_completa.append(float(coluna_y[i + 1]))
-            coluna_ddp_completa.append(float(coluna_ddp[i + 1]))
+    x_ = []
+    y_ = []
+    ddp_= []
+    # for _ in range(len(y) * 2 - 1):
+    #     x.append(None)
+    #     y.append(None)
+    #     ddp.append(None)
+    k = 0
+    for i in range(2, n_colunas - 2):
+        for j in range(2, n_linhas - 2):
+            ddp_.append(matriz[i][j])
+            if i%2 == 0:
+                x_.append(i/2)
+            elif i%2 != 0:
+                x_.append(float(i/2))
 
+            if j%2 == 0:
+                y_.append(j/2)
+            elif j%2 != 0:
+                y_.append(float(j/2))
 
-    for i in range(0, len(coluna_y), cte)
-
-
-    for i in range(len(dados)):
-        pontos.append(Ponto(coluna_x_completa[i], coluna_y_completa[i], coluna_ddp_completa[i]))
-
-def media_eixo_y(Pontos pontos):
+    for i in range(len(x_)):
+        pontos.append(Ponto(x_[i], y_[i], ddp_[i]))
 
