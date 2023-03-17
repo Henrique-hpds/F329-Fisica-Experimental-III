@@ -1,6 +1,14 @@
 import pandas as pd
 from ponto import *
 
+def truncate(f, n):
+    '''Truncates/pads a float f to n decimal places without rounding'''
+    s = '{}'.format(f)
+    if 'e' in s or 'E' in s:
+        return '{0:.{1}f}'.format(f, n)
+    i, p, d = s.partition('.')
+    return '.'.join([i, (d+'0'*n)[:n]])
+
 def ler_dados(pontos:list) -> None:
     dados = pd.read_excel("dados_inventados.xlsx")
 
@@ -33,7 +41,21 @@ def ler_dados(pontos:list) -> None:
                 matriz[i + 1][j] = (matriz[i][j] + matriz[i + 2][j])/2 
             
             if matriz[i - 2][j] != 0:
-                matriz[i - 2][j] = (matriz[i][j] + matriz[i - 2][j])/2 
+                matriz[i - 1][j] = (matriz[i][j] + matriz[i - 2][j])/2 
+
+            if matriz[i][j + 2] != 0:
+                matriz[i][j + 1] = (matriz[i][j] + matriz[i][j + 2])/2 
+
+            if matriz[i][j - 2] != 0:
+                matriz[i][j - 1] = (matriz[i][j] + matriz[i][j - 2])/2 
+
+    for i in range(2, n_colunas - 2, 2):
+        for j in range(3, n_linhas - 2, 2):
+            if matriz[i + 2][j] != 0:
+                matriz[i + 1][j] = (matriz[i][j] + matriz[i + 2][j])/2 
+            
+            if matriz[i - 2][j] != 0:
+                matriz[i - 1][j] = (matriz[i][j] + matriz[i - 2][j])/2 
 
             if matriz[i][j + 2] != 0:
                 matriz[i][j + 1] = (matriz[i][j] + matriz[i][j + 2])/2 
@@ -44,10 +66,7 @@ def ler_dados(pontos:list) -> None:
     x_ = []
     y_ = []
     ddp_= []
-    # for _ in range(len(y) * 2 - 1):
-    #     x.append(None)
-    #     y.append(None)
-    #     ddp.append(None)
+
     k = 0
     for i in range(2, n_colunas - 2):
         for j in range(2, n_linhas - 2):
@@ -62,6 +81,18 @@ def ler_dados(pontos:list) -> None:
             elif j%2 != 0:
                 y_.append(float(j/2))
 
+    print(len(x_))
+
     for i in range(len(x_)):
         pontos.append(Ponto(x_[i], y_[i], ddp_[i]))
 
+
+# for i in range(2, n_colunas - 2, 1):
+#     for j in range(2, n_linhas - 2, 1):
+#         if matriz[i][j] == 0:
+#             print("------", end="\t")
+#             # print("0.0000", end="\t")
+#         else:
+#             print(truncate(matriz[i][j], 4), end="\t")
+#     print()
+#     print()
