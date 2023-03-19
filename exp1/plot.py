@@ -1,8 +1,16 @@
 import matplotlib.pyplot as plt
 import random as rd
 
-ERRO = 0.05
-    
+ERRO = 0.08
+
+def truncate(f, n):
+    '''Truncates/pads a float f to n decimal places without rounding'''
+    s = '{}'.format(f)
+    if 'e' in s or 'E' in s:
+        return '{0:.{1}f}'.format(f, n)
+    i, p, d = s.partition('.')
+    return '.'.join([i, (d+'0'*n)[:n]])
+
 def plota_grafico(pontos: list) -> None:
     
     
@@ -20,7 +28,7 @@ def plota_grafico(pontos: list) -> None:
             coluna_x.append(atual.coordenada["x"])
             coluna_y.append(atual.coordenada["y"])
         else:
-            plt.scatter(coluna_x, coluna_y, label=str((menor + ERRO)/2) + ' V ± ' + str(ERRO/2)) # markeredgecolor=cor , markerfacecolor="black", markersize=2,marker="o"
+            plt.scatter(coluna_x, coluna_y, label=truncate((menor + ERRO)/2, 2) + ' V ± ' + truncate(ERRO/2, 2)) # markeredgecolor=cor , markerfacecolor="black", markersize=2,marker="o"
             menor = atual.ddp
  
             coluna_x.clear()
