@@ -89,7 +89,7 @@ def fazer_media(matriz, matriz_origiral, i, j):
             matriz[i][j + int(k/2)] = (matriz[i][j] + matriz[i][j + k])/2 
 
 
-def interpolar(x, y, ddp):
+def interpolar(x, y, ddp, n):
     '''Interpola as ddp proximas'''
 
     x_inicial = x[0]
@@ -113,15 +113,12 @@ def interpolar(x, y, ddp):
 
     #Aqui teos que decidir quantas vezes interpolamos
 
-    for i in range(n_colunas):
-        for j in range(n_linhas):
-            fazer_media(matriz, matriz_origiral, i, j)
+    for i in range(n):
+        for i in range(n_colunas):
+            for j in range(n_linhas):
+                fazer_media(matriz, matriz_origiral, i, j)
 
-    atualiza_original(matriz, matriz_origiral)
-
-    for i in range(n_colunas):
-        for j in range(n_linhas):
-            fazer_media(matriz, matriz_origiral, i, j)
+        atualiza_original(matriz, matriz_origiral)
 
     #Termina aqui a quantidade de interpolações
 
