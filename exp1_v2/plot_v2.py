@@ -9,7 +9,7 @@ fn = "Placas Paralelas"
 df = pd.read_csv(fn+".csv")
 
 #define o tamanho do gráfico
-fig, ax = plt.subplots(1,1,figsize=[28,18])
+fig, ax = plt.subplots(1,1,figsize=[14,9])
 
 # separa os dados em dois vetores referentes aos eixos e uma matriz referente ao potencial
 X = np.array(df.iloc[:,0]) #usa a primeira coluna para gerar o eixo-x de posição
@@ -20,7 +20,7 @@ Z = np.array(df.iloc[:,1:]); #usa o restante da matriz para gerar a distribuiç�
 dx, dy = np.gradient(-Z)
 
 # Gráfico do Potencial
-cs = ax.contour(Y,X,Z,levels=15) # escala de cores
+cs = ax.contourf(Y,X,Z,levels=15) # escala de cores
 ax.clabel(cs, inline=1, fontsize=10, fmt=  '%1.1f')
 
 # Gráfico de vetores do campo elétrico superpostos ao potencial
@@ -30,10 +30,9 @@ ax.quiver(Y,X,dy,dx,width=0.00075)
 ax.hlines([0, 19],0,29,colors='black',linestyles='--')
 
 # Proriedades dos eixos
-ax.set_xlabel('Distância (cm)', fontsize=25)
-ax.set_ylabel('Distância (cm)', fontsize=25)
-ax.set_title(fn, fontsize=35)
+ax.set_xlabel('Distância (cm)', fontsize=20)
+ax.set_ylabel('Distância (cm)', fontsize=20)
+ax.set_title("Experimento - Placas Paralelas", fontsize=30)
 
 fn_fig = fn
 fig.savefig(fn_fig+'.png',transparent=False)
-fig.savefig(fn_fig+'.pdf',transparent=True)
