@@ -58,8 +58,6 @@ def mmq():
     dados = pd.read_excel("exp2.xlsx")
 
     corrente = dados["corrente"]
-
-    corrente = [x/1000 for x in corrente]
     
     f_quadrado = dados["f_quadrado"]
 
@@ -115,7 +113,8 @@ def mmq():
 
 
         plt.scatter(lista_x, lista_y, c='#000000', marker='o')
-        x = linspace(((15.10 + 7.88)/2), max(lista_x), 1500)
+        print(max(lista_x))
+        x = linspace(((15.10 + 7.88)/2000), max(lista_x), 1500)
         plt.scatter(x, a * x + b, s=0.2, c='red', label= truncate(a, 3) + "X + " + truncate(b, 1))
 
     ###############################
@@ -179,7 +178,7 @@ def mmq():
         print(f'{Bt = }\n')
 
         plt.scatter(lista_x, lista_y, c='#000000', marker='o')
-        x = linspace(min(lista_x),((15.10 + 7.88)/2) ,1500)
+        x = linspace(min(lista_x),((15.10 + 7.88)/2000) ,1500)
         plt.scatter(x, a * x + b, s=0.2, c='blue', label= truncate(a, 3) + "X + " + truncate(b, 1))
 
     plt.legend(bbox_to_anchor=(1.01, 0.5), loc='upper left')
