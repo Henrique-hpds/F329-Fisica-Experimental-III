@@ -5,7 +5,7 @@ import matplotlib as mpl                 # Usado para alterar as propriedades do
 mpl.rc('font', size=14)
 
 # importar os dados 
-fn = "Circulo"
+fn = "rel1"
 df = pd.read_csv(fn+".csv")
 
 #define o tamanho do gráfico
@@ -21,7 +21,7 @@ dx, dy = np.gradient(-Z)
 
 # Gráfico do Potencial
 cs = ax.contourf(Y,X,Z,levels=15) # escala de cores
-ax.clabel(cs, inline=1, fontsize=15, fmt='%1.1f', colors='black')
+ax.clabel(cs, inline=1, fontsize=10, fmt=  '%1.1f')
 
 # Gráfico de vetores do campo elétrico superpostos ao potencial
 ax.quiver(Y,X,dy,dx,width=0.00075)
@@ -32,7 +32,7 @@ ax.hlines([0, 19],0,29,colors='black',linestyles='--')
 # Proriedades dos eixos
 ax.set_xlabel('Distância (cm)', fontsize=20)
 ax.set_ylabel('Distância (cm)', fontsize=20)
-ax.set_title("Experimento - Com gaiola no centro", fontsize=30)
+ax.set_title("Experimento - Placas Paralelas", fontsize=30)
 
 fn_fig = fn
 fig.savefig(fn_fig+'.png',transparent=False)
