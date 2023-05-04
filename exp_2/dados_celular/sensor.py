@@ -34,5 +34,8 @@ for i in range(len(xSolucao)):
     # print(str(i) + ": Xt: " + str(xSolucao[i][0]) + ": Yt: + " + str(ySolucao[i][0]) + " Total: " + str(sqrt((xSolucao[i][0]) ** 2 + (ySolucao[i][0])**2)) + '\n')
     campoH.append(sqrt((xSolucao[i][0]) ** 2 + (ySolucao[i][0])**2))
 
-print("Media = " + str(np.mean(campoH)))
-print("Desvio = " + str(np.std(campoH)))
+print("Media = " , np.mean(campoH))
+print("Desvio = " , np.std(campoH))
+
+desvpada = np.std(campoH)/sqrt(len(xSolucao))
+print("Incerteza Estatística =", desvpada)
